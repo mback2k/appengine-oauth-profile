@@ -1,4 +1,5 @@
 from google.appengine.ext.webapp import template
+from google.appengine.api import app_identity
 from google.appengine.api import users
 import webapp2
 import json
@@ -22,6 +23,7 @@ class Home(webapp2.RequestHandler):
             url_linktext = 'Login'
 
         template_values = {
+            'hostname': app_identity.get_default_version_hostname(),
             'userinfo': userinfo,
             'url': url,
             'url_linktext': url_linktext,
