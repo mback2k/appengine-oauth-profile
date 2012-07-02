@@ -13,5 +13,8 @@ handlers:
   script: home.app
   secure: always
 
+- url: /robots.txt
+  script: robots.app
+
 - url: /.*
   script: notfound.app
