@@ -32,4 +32,8 @@ Documentation
   https://developers.google.com/appengine/docs/python/oauth/overview
 - Registration for Web-Based Applications:
   https://developers.google.com/accounts/docs/RegistrationForWebAppsAuto
- 
+
+License
+-------
+* Released under MIT License
+* Copyright (c) 2012 Marc Hoersken <info@marc-hoersken.de>
