@@ -12,3 +12,6 @@ handlers:
 - url: /
   script: home.app
   secure: always
+
+- url: /.*
+  script: notfound.app
