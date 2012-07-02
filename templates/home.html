@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Google App Engine - OAuth Profile</title>
+</head>
+<body>
+  <p><a href="{{ url }}">{{ url_linktext }}</a></p>
+  <p><code>&#123;<br />
+  &nbsp;&nbsp;"id": "{{ userinfo.id }}",<br />
+  &nbsp;&nbsp;"email": "{{ userinfo.email }}",<br />
+  &nbsp;&nbsp;"nickname": "{{ userinfo.nickname }}"<br />
+  &#125;</code></p>
+  <p>OAuth Endpoint:<p>
+  <ul>
+    <li><strong>Getting a Request Token</strong>:<br /><code>https://oauth-profile.appspot.com/_ah/OAuthGetRequestToken</code></li>
+    <li><strong>Redirecting a User to Authorize</strong>:<br /><code>https://oauth-profile.appspot.com/_ah/OAuthAuthorizeToken</code></li>
+    <li><strong>Getting an Access Token</strong>:<br /><code>https://oauth-profile.appspot.com/_ah/OAuthGetAccessToken</code></li>
+  </ul>
+  <p>Web Service Endpoint:<p>
+  <ul>
+    <li><strong>Retrieving the User Information</strong>:<br /><code>https://oauth-profile.appspot.com/oauth/v1/userinfo</code></li>
+  </ul>
+  <p>Documentation:</p>
+  <ul>
+    <li><strong>Google App Engine</strong>:<br /><a href="https://developers.google.com/appengine/docs/python/oauth/overview">OAuth for Python Overview</a></li>
+    <li><strong>Google Accounts</strong>:<br /><a href="https://developers.google.com/accounts/docs/RegistrationForWebAppsAuto">Registration for Web-Based Applications</a></li>
+  </ul>
+  <p><a href="https://github.com/mback2k/appengine-oauth-profile">Source Code on Github</a> - This page really needs a better design, why not contribute one?</p>
+</body>
+</html>

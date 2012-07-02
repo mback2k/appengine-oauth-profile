@@ -8,3 +8,7 @@ handlers:
 - url: /oauth/v1/userinfo
   script: userinfo.app
   secure: always
+
+- url: /
+  script: home.app
+  secure: always
