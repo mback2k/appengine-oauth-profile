@@ -28,8 +28,8 @@ Web Service Endpoint
 
 Documentation
 -------------
-- Google App Engine: OAuth for Python Overview
+- OAuth for Python Overview:
   https://developers.google.com/appengine/docs/python/oauth/overview
-- Google Accounts: Registration for Web-Based Applications
+- Registration for Web-Based Applications:
   https://developers.google.com/accounts/docs/RegistrationForWebAppsAuto
  
