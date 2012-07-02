@@ -7,3 +7,4 @@ threadsafe: true
 handlers:
 - url: /oauth/v1/userinfo
   script: userinfo.app
+  secure: always
