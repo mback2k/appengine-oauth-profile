@@ -29,7 +29,7 @@ class Home(webapp2.RequestHandler):
             'url_linktext': url_linktext,
         }
 
-        path = os.path.join(os.path.dirname(__file__), 'templates/home.html')
+        path = os.path.join(os.path.dirname(__file__), '../templates/home.html')
         self.response.out.write(template.render(path, template_values))
 
 app = webapp2.WSGIApplication([('/', Home)])

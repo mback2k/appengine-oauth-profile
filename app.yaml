@@ -6,15 +6,15 @@ threadsafe: true
 
 handlers:
 - url: /oauth/v1/userinfo
-  script: userinfo.app
+  script: handlers.userinfo.app
   secure: always
 
 - url: /
-  script: home.app
+  script: handlers.home.app
   secure: always
 
 - url: /robots.txt
-  script: robots.app
+  script: handlers.robots.app
 
 - url: /.*
-  script: notfound.app
+  script: handlers.notfound.app
