@@ -1,11 +1,15 @@
 application: oauth-profile
-version: 1
+version: 2
 runtime: python27
 api_version: 1
 threadsafe: true
 
 handlers:
 - url: /oauth/v1/userinfo
+  script: handlers.userinfo.app
+  secure: always
+
+- url: /oauth/v2/userinfo
   script: handlers.userinfo.app
   secure: always
 

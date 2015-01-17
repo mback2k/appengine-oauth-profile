@@ -12,8 +12,8 @@ The following example shows a dictionary of returned information:
       "nickname": "example"
     }
 
-OAuth Endpoint
---------------
+OAuth 1.0 Endpoint
+------------------
 - Getting a Request Token:
   https://oauth-profile.appspot.com/_ah/OAuthGetRequestToken
 - Redirecting a User to Authorize:
@@ -23,17 +23,19 @@ OAuth Endpoint
 
 Web Service Endpoint
 --------------------
-- Retrieving the User Information:
+- Retrieving the User Information (OAuth 1.0):
   https://oauth-profile.appspot.com/oauth/v1/userinfo
+- Retrieving the User Information (OAuth 2.0):
+  https://oauth-profile.appspot.com/oauth/v2/userinfo
 
 Documentation
 -------------
 - OAuth for Python Overview:
   https://developers.google.com/appengine/docs/python/oauth/overview
-- Registration for Web-Based Applications:
+- Registration for Web-Based Applications (OAuth 1.0):
   https://developers.google.com/accounts/docs/RegistrationForWebAppsAuto
 
 License
 -------
 * Released under MIT License
-* Copyright (c) 2012 Marc Hoersken <info@marc-hoersken.de>
+* Copyright (c) 2012-2015 Marc Hoersken <info@marc-hoersken.de>

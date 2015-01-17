@@ -12,7 +12,7 @@
   &nbsp;&nbsp;"email": "{{ userinfo.email }}",<br />
   &nbsp;&nbsp;"nickname": "{{ userinfo.nickname }}"<br />
   &#125;</code></p>
-  <p>OAuth Endpoint:<p>
+  <p>OAuth 1.0 Endpoint:<p>
   <ul>
     <li><strong>Getting a Request Token</strong>:<br /><code>https://{{ hostname }}/_ah/OAuthGetRequestToken</code></li>
     <li><strong>Redirecting a User to Authorize</strong>:<br /><code>https://{{ hostname }}/_ah/OAuthAuthorizeToken</code></li>
@@ -20,12 +20,13 @@
   </ul>
   <p>Web Service Endpoint:<p>
   <ul>
-    <li><strong>Retrieving the User Information</strong>:<br /><code>https://{{ hostname }}/oauth/v1/userinfo</code></li>
+    <li><strong>Retrieving the User Information</strong> (OAuth 1.0):<br /><code>https://{{ hostname }}/oauth/v1/userinfo</code></li>
+    <li><strong>Retrieving the User Information</strong> (OAuth 2.0):<br /><code>https://{{ hostname }}/oauth/v2/userinfo</code></li>
   </ul>
   <p>Documentation:</p>
   <ul>
     <li><strong>Google App Engine</strong>:<br /><a href="https://developers.google.com/appengine/docs/python/oauth/overview">OAuth for Python Overview</a></li>
-    <li><strong>Google Accounts</strong>:<br /><a href="https://developers.google.com/accounts/docs/RegistrationForWebAppsAuto">Registration for Web-Based Applications</a></li>
+    <li><strong>Google Accounts</strong> (OAuth 1.0):<br /><a href="https://developers.google.com/accounts/docs/RegistrationForWebAppsAuto">Registration for Web-Based Applications</a></li>
   </ul>
   <p><a href="https://github.com/mback2k/appengine-oauth-profile">Source Code on Github</a> - This page really needs a better design, why not contribute one?</p>
 </body>

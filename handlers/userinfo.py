@@ -8,7 +8,7 @@ class UserInfo(webapp2.RequestHandler):
         errormsg = None
 
         try:
-            user = oauth.get_current_user()
+            user = self.get_current_user()
             if user:
                 userinfo['id'] = user.user_id()
                 userinfo['email'] = user.email()
@@ -35,6 +35,15 @@ class UserInfo(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'application/json'
         self.response.out.write(data)
 
+class UserInfoV1(UserInfo):
+    def get_current_user(self):
+        return oauth.get_current_user()
+
+class UserInfoV2(UserInfo):
+    def get_current_user(self):
+	scope = 'https://www.googleapis.com/auth/userinfo.email'
+        return oauth.get_current_user(scope)
+
 def get_error(message, code=401, location='header'):
     return {
       'error': {
@@ -52,4 +61,5 @@ def get_error(message, code=401, location='header'):
       }
     }
 
-app = webapp2.WSGIApplication([('/oauth/v1/userinfo', UserInfo)])
+app = webapp2.WSGIApplication([('/oauth/v1/userinfo', UserInfoV1),
+                               ('/oauth/v2/userinfo', UserInfoV2)])
