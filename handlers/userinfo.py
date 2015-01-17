@@ -41,7 +41,7 @@ class UserInfoV1(UserInfo):
 
 class UserInfoV2(UserInfo):
     def get_current_user(self):
-	scope = 'https://www.googleapis.com/auth/userinfo.email'
+        scope = 'https://www.googleapis.com/auth/userinfo.email'
         return oauth.get_current_user(scope)
 
 def get_error(message, code=401, location='header'):
