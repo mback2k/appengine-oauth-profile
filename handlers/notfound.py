@@ -1,12 +1,8 @@
-from google.appengine.ext.webapp import template
-import webapp2
-import os
+from flask import Blueprint, render_template
 
-class NotFound(webapp2.RequestHandler):
-    def get(self):
-        self.error(404)
+bp = Blueprint('notfound', __name__)
 
-        path = os.path.join(os.path.dirname(__file__), '../templates/notfound.html')
-        self.response.out.write(template.render(path, {}))
-
-app = webapp2.WSGIApplication([('/.*', NotFound)])
+@bp.errorhandler(404)
+@bp.route("/<path:path>")
+def notfound(path):
+    return render_template('notfound.html'), 404

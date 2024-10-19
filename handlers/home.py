@@ -1,35 +1,31 @@
-from google.appengine.ext.webapp import template
 from google.appengine.api import app_identity
 from google.appengine.api import users
-import webapp2
-import json
-import os
+from flask import Blueprint, request, render_template
 
-class Home(webapp2.RequestHandler):
-    def get(self):
-        userinfo = {}
+bp = Blueprint('home', __name__)
 
-        user = users.get_current_user()
-        if user:
-            userinfo['id'] = user.user_id()
-            userinfo['email'] = user.email()
-            userinfo['nickname'] = user.nickname()
+@bp.route('/')
+def home():
+    userinfo = {}
 
-            url = users.create_logout_url(self.request.uri)
-            url_linktext = 'Logout'
+    user = users.get_current_user()
+    if user:
+        userinfo['id'] = user.user_id()
+        userinfo['email'] = user.email()
+        userinfo['nickname'] = user.nickname()
 
-        else:
-            url = users.create_login_url(self.request.uri)
-            url_linktext = 'Login'
+        url = users.create_logout_url(request.path)
+        url_linktext = 'Logout'
 
-        template_values = {
-            'hostname': app_identity.get_default_version_hostname(),
-            'userinfo': userinfo,
-            'url': url,
-            'url_linktext': url_linktext,
-        }
+    else:
+        url = users.create_login_url(request.path)
+        url_linktext = 'Login'
 
-        path = os.path.join(os.path.dirname(__file__), '../templates/home.html')
-        self.response.out.write(template.render(path, template_values))
+    template_values = {
+        'hostname': app_identity.get_default_version_hostname(),
+        'userinfo': userinfo,
+        'url': url,
+        'url_linktext': url_linktext,
+    }
 
-app = webapp2.WSGIApplication([('/', Home)])
+    return render_template('home.html', **template_values)

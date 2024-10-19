@@ -1,48 +1,50 @@
 from google.appengine.api import oauth
-import webapp2
+from flask import Blueprint
 import json
 
-class UserInfo(webapp2.RequestHandler):
-    def get(self):
-        userinfo = {}
-        errormsg = None
+bp = Blueprint('userinfo', __name__)
 
-        try:
-            user = self.get_current_user()
-            if user:
-                userinfo['id'] = user.user_id()
-                userinfo['email'] = user.email()
-                userinfo['nickname'] = user.nickname()
+@bp.route('/oauth/v1/userinfo')
+def userinfo_v1():
+    callback = lambda: oauth.get_current_user()
+    return userinfo(callback)
 
-        except oauth.InvalidOAuthTokenError, e:
-            errormsg = 'invalid token'
+@bp.route('/oauth/v2/userinfo')
+def userinfo_v2():
+    scope = 'https://www.googleapis.com/auth/userinfo.email'
+    callback = lambda: oauth.get_current_user(scope)
+    return userinfo(callback)
 
-        except oauth.OAuthRequestError, e:
-            errormsg = 'invalid header'
+def userinfo(callback):
+    userinfo = {}
+    errormsg = None
+    code = 200
 
-        except oauth.OAuthServiceFailureError, e:
-            errormsg = 'service failure'
+    try:
+        user = callback()
+        if user:
+            userinfo['id'] = user.user_id()
+            userinfo['email'] = user.email()
+            userinfo['nickname'] = user.nickname()
 
-        if errormsg:
-            error = get_error(errormsg)
-            self.error(error['error']['code'])
+    except oauth.InvalidOAuthTokenError:
+        errormsg = 'invalid token'
 
-            data = json.dumps(error)
+    except oauth.OAuthRequestError:
+        errormsg = 'invalid header'
 
-        else:
-            data = json.dumps(userinfo)
+    except oauth.OAuthServiceFailureError:
+        errormsg = 'service failure'
 
-        self.response.headers['Content-Type'] = 'application/json'
-        self.response.out.write(data)
+    if errormsg:
+        error = get_error(errormsg)
+        code = error['error']['code']
+        data = json.dumps(error)
 
-class UserInfoV1(UserInfo):
-    def get_current_user(self):
-        return oauth.get_current_user()
+    else:
+        data = json.dumps(userinfo)
 
-class UserInfoV2(UserInfo):
-    def get_current_user(self):
-        scope = 'https://www.googleapis.com/auth/userinfo.email'
-        return oauth.get_current_user(scope)
+    return data, code, {'Content-Type': 'application/json'}
 
 def get_error(message, code=401, location='header'):
     return {
@@ -60,6 +62,3 @@ def get_error(message, code=401, location='header'):
         'message': message
       }
     }
-
-app = webapp2.WSGIApplication([('/oauth/v1/userinfo', UserInfoV1),
-                               ('/oauth/v2/userinfo', UserInfoV2)])
